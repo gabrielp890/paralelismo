@@ -1,6 +1,10 @@
 package edu.eci.arsw.math;
 
 ///  <summary>
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 ///  An implementation of the Bailey-Borwein-Plouffe formula for calculating hexadecimal
 ///  digits of pi.
 ///  https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula
@@ -10,21 +14,32 @@ public class PiDigits {
 
     private static int DigitsPerSum = 8;
     private static double Epsilon = 1e-17;
-
     
     /**
      * Returns a range of hexadecimal digits of pi.
      * @param start The starting location of the range.
      * @param count The number of digits to return
+     * @param n numero de hilos entre los que se va a paralelizar la solución
      * @return An array containing the hexadecimal digits.
      */
-    public static byte[] getDigits(int start, int count) {
+    public static byte[] getDigits(int start, int count, int n) {
         if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
 
         if (count < 0) {
             throw new RuntimeException("Invalid Interval");
+        }
+        if(n>1){
+            int tamaño=(count-start)/n;
+            System.out.println("test "+tamaño);
+            String hilos[]=new String[tamaño];
+            for (int i = 0; i < hilos.length; i++) {
+                hilos[i]="hilo"+i;
+            }
+            for (int i = 0; i < hilos.length; i++) {
+//                ManejoHilos hilos[i];
+            }
         }
 
         byte[] digits = new byte[count];
@@ -42,8 +57,13 @@ public class PiDigits {
 
             sum = 16 * (sum - Math.floor(sum));
             digits[i] = (byte) sum;
+            System.out.println(digits[i]);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PiDigits.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
         return digits;
     }
 

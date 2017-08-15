@@ -5,7 +5,8 @@
  */
 package edu.eci.arsw.math;
 
-import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,9 +15,9 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String a[]) {
-        System.out.println(bytesToHex(PiDigits.getDigits(0, 10)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 100)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000)));
+        System.out.println(bytesToHex(PiDigits.getDigits(0, 10,1)));
+        System.out.println(bytesToHex(PiDigits.getDigits(1, 100,2)));
+        System.out.println(bytesToHex(PiDigits.getDigits(1, 10000,2)));
     }
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
@@ -31,7 +32,13 @@ public class Main {
         StringBuilder sb=new StringBuilder();
         for (int i=0;i<hexChars.length;i=i+2){
             //sb.append(hexChars[i]);
-            sb.append(hexChars[i+1]);            
+//            System.out.println(hexChars[i+1]);
+            sb.append(hexChars[i+1]); 
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
         return sb.toString();
     }
