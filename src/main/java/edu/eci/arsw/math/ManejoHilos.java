@@ -10,17 +10,25 @@ package edu.eci.arsw.math;
  * @author Gabriel
  */
 public class ManejoHilos extends Thread{
-    int numeroHilos;
+    int numeroHilos, inicio, tamaño;
 
-    public ManejoHilos(int numeroHilos) {
-        this.numeroHilos = numeroHilos;
+    public ManejoHilos(int inicio, int tamaño) {
+        this.inicio = inicio;
+        this.tamaño = tamaño;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < numeroHilos; i++) {
-            
-        }
+        System.out.println("inicio: "+inicio+" tamaño: "+tamaño+ " "+PiDigits.getDigits(inicio, tamaño));
+//        for (int i = inicio; i < tamaño; i++) {
+//            System.out.println("inicio: "+inicio+" tamaño: "+tamaño+" contador: "+i); 
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(ManejoHilos.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+       
     }
     
 }
